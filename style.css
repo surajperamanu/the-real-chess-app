@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  #game-container {
+    text-align: center;
+  }
+  
+  #board {
+    width: 400px;
+    margin: 0 auto;
+  }
+  
+  #status {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }

@@ -2,23 +2,72 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+This will install all required packages, including:
+- socket.io-client for real-time multiplayer functionality
+- @types/socket.io-client for TypeScript type definitions
+- chess.js for game logic
+- react-chessboard for the chess board UI
+
+Then, start the Socket.IO server:
+
+```bash
+cd server
+npm install  # Install server dependencies
+npm run dev  # Start the server with nodemon
+```
+
+Finally, in a new terminal, start the Next.js development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Multiplayer Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The multiplayer functionality requires both the Next.js client and Socket.IO server to be running:
+
+1. The Socket.IO server runs on port 4000 (http://localhost:4000)
+2. The Next.js client runs on port 3000 (http://localhost:3000)
+
+### Troubleshooting Socket.IO Issues
+
+If you encounter Socket.IO related errors:
+
+1. Port in Use Error (EADDRINUSE):
+   ```
+   Error: listen EADDRINUSE: address already in use :::4000
+   ```
+   Solution:
+   - The server is already running in another terminal
+   - Kill the process using port 4000:
+     ```bash
+     # On Windows
+     netstat -ano | findstr :4000
+     taskkill /F /PID <PID>
+     
+     # On Unix-like systems
+     lsof -i :4000
+     kill -9 <PID>
+     ```
+
+2. Socket.IO Connection Errors:
+   - Verify the server is running on port 4000
+   - Check console for connection error messages
+   - Ensure socket.io-client version matches server socket.io version
+
+3. Missing Dependencies:
+   ```bash
+   npm run validate-deps  # Check Socket.IO dependencies
+   npm run predev        # Reinstall Socket.IO dependencies
+   ```
 
 ## Learn More
 
